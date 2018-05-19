@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RandomPicker {
@@ -16,19 +17,26 @@ public class RandomPicker {
     int spd = students / days;
     int excess = students % days;
 
-    int[][] result = new int[days][spd + (excess > 0 ? 1 : 0)];
+    int[][] result = new int[days][];
 
+    // Build array.
     for (int i = 0; i < days; i++) {
       int howmany = spd + (excess-- > 0 ? 1 : 0);
-      System.out.printf("%2d: ", howmany);
+      result[i] = new int[howmany];
       for (int j = 0; j < howmany; j++) {
         int index = (int) (Math.random() * (double) queue.size());
         result[i][j] = queue.remove(index);
-        System.out.printf("%2d, ", result[i][j]);
+      }
+    }
+
+    // Sort and print.
+    for (int[] day : result) {
+      Arrays.sort(day);
+      System.out.printf("%2d: ", day.length);
+      for (int stu : day) {
+          System.out.printf("%2d, ", stu);
       }
       System.out.println();
-      //int index = (int) (Math.random() * (double) queue.size());
-      //System.out.printf("%2d\n", queue.remove(index));
     }
   }
 }
