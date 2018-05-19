@@ -16,16 +16,19 @@ public class RandomPicker {
     int spd = students / days;
     int excess = students % days;
 
+    int[][] result = new int[days][spd + (excess > 0 ? 1 : 0)];
+
     for (int i = 0; i < days; i++) {
       int howmany = spd + (excess-- > 0 ? 1 : 0);
       System.out.printf("%2d: ", howmany);
-      for (int j = 0; j < howmany - 1; j++) {
+      for (int j = 0; j < howmany; j++) {
         int index = (int) (Math.random() * (double) queue.size());
-        System.out.printf("%2d, ", queue.remove(index));
+        result[i][j] = queue.remove(index);
+        System.out.printf("%2d, ", result[i][j]);
       }
-      int index = (int) (Math.random() * (double) queue.size());
-      System.out.printf("%2d\n", queue.remove(index));
+      System.out.println();
+      //int index = (int) (Math.random() * (double) queue.size());
+      //System.out.printf("%2d\n", queue.remove(index));
     }
-
   }
 }
